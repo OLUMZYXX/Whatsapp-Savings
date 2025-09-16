@@ -1,9 +1,25 @@
 'use client'
-import { useState, useRef, useMemo } from 'react'
+import { useState, useRef, useMemo, useEffect } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import Image from 'next/image'
 
 export default function HomePage() {
+  // Scroll to Top button state
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  // Show button when scrolled down
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Scroll to top handler
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
   const [activeCase, setActiveCase] = useState(0)
   const [activeFeature, setActiveFeature] = useState(0)
   // const [activeTestimonial, setActiveTestimonial] = useState(0)
@@ -256,6 +272,29 @@ export default function HomePage() {
 
   return (
     <div className='min-h-screen flex flex-col bg-gray-50 overflow-x-hidden overflow-y-hidden'>
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className='fixed bottom-6 right-6 z-50 bg-blue-600 text-white rounded-full shadow-lg p-3 hover:bg-blue-700 transition-all duration-200 flex items-center justify-center'
+          aria-label='Scroll to top'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-6 w-6'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M5 15l7-7 7 7'
+            />
+          </svg>
+        </button>
+      )}
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
