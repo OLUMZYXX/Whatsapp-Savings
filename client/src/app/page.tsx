@@ -463,7 +463,7 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <motion.div
+            {/* <motion.div
               className='inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-4'
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
@@ -471,7 +471,7 @@ export default function HomePage() {
               viewport={{ once: true }}
             >
               Perfect for Every Group
-            </motion.div>
+            </motion.div> */}
 
             <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
               Tailored for Your{' '}
@@ -786,21 +786,25 @@ export default function HomePage() {
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
-                className='bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover-lift transform hover:scale-105 hover:rotate-1'
-                initial={{ opacity: 0, y: 50, rotate: -5 }}
-                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                className='bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300'
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.6,
-                  delay: 0.4 * index,
+                  duration: 0.7,
+                  delay: 0.3 * index,
                   type: 'spring',
+                  stiffness: 80,
                 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05, rotate: 2 }}
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: '0 8px 32px rgba(59,130,246,0.12)',
+                }}
               >
                 <motion.div
                   className='text-center mb-4 sm:mb-6'
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.07 }}
+                  transition={{ duration: 0.25 }}
                 >
                   <span className='text-3xl sm:text-4xl'>
                     {testimonial.avatar}
