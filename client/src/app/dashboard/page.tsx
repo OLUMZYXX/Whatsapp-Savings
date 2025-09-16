@@ -153,7 +153,7 @@ export default function DashboardPage() {
 
   return (
     <div className='min-h-screen bg-gray-50 p-6'>
-      <div className='max-w-[1200px] mx-auto space-y-8'>
+      <div className='max-w-[1000px] mx-auto space-y-8'>
         {/* Welcome Message */}
         <div className='bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white'>
           <div className='flex items-center justify-between'>
