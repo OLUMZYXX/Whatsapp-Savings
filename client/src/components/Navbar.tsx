@@ -1,7 +1,7 @@
 'use client'
 
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { useState } from 'react'
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -20,10 +20,10 @@ export default function Navbar() {
         {/* Desktop Navigation Links */}
         <div className='hidden md:flex items-center space-x-8'>
           <Link
-            href='/'
+            href='#usecases'
             className='text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group'
           >
-            Home
+            Use Cases
             <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full'></span>
           </Link>
           <Link
@@ -37,7 +37,14 @@ export default function Navbar() {
             href='/groups'
             className='text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group'
           >
-            Groups
+            Features
+            <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full'></span>
+          </Link>
+          <Link
+            href='#faq'
+            className='text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group'
+          >
+            FAQ
             <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full'></span>
           </Link>
         </div>
@@ -92,11 +99,11 @@ export default function Navbar() {
       >
         <div className='px-6 py-4 space-y-4'>
           <Link
-            href='/'
+            href='#usecases'
             className='block text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2'
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Home
+            Use Cases
           </Link>
           <Link
             href='/dashboard'
@@ -110,7 +117,14 @@ export default function Navbar() {
             className='block text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2'
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Groups
+            Features
+          </Link>
+          <Link
+            href='#faq'
+            className='block text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2'
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            FAQ
           </Link>
           <hr className='border-gray-200' />
           <Link

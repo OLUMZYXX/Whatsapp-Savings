@@ -226,3 +226,8 @@
   left: 100%;
   animation-delay: 9s;
 }
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}

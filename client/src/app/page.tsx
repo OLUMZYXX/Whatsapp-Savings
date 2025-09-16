@@ -1,19 +1,12 @@
 'use client'
-
-import { useState, useRef } from 'react'
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-} from 'framer-motion'
+import { useState, useRef, useMemo } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import Image from 'next/image'
 
 export default function HomePage() {
+  const [activeCase, setActiveCase] = useState(0)
   const [activeFeature, setActiveFeature] = useState(0)
   // const [activeTestimonial, setActiveTestimonial] = useState(0)
-
   // Scroll hooks for parallax effects
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -194,6 +187,73 @@ export default function HomePage() {
     },
   ]
 
+  const useCases = [
+    {
+      id: 'family',
+      title: 'Family Savings',
+      subtitle: 'Build your future together',
+      description:
+        'Save for family vacations, emergencies, or future goals with your loved ones. Create lasting memories while building financial security.',
+      image: '/iPhone 16 Plus Light.png',
+      alt: 'Family using SavingsHub on WhatsApp',
+      stats: { users: '2.5K+', saved: '$485K' },
+      features: [
+        'Emergency funds',
+        'Vacation planning',
+        'Education savings',
+        'Home improvements',
+      ],
+      color: 'from-purple-500 to-purple-700',
+      bgGradient: 'from-purple-50 to-purple-100',
+    },
+    {
+      id: 'friends',
+      title: 'Friends Group',
+      subtitle: 'Share experiences, share savings',
+      description:
+        'Pool money with friends for events, gifts, or shared experiences. Make group planning effortless and transparent.',
+      image: '/iPhone 16 Plus Light.png',
+      alt: 'Friends group saving together',
+      stats: { users: '4.2K+', saved: '$320K' },
+      features: [
+        'Event planning',
+        'Gift pooling',
+        'Travel adventures',
+        'Group purchases',
+      ],
+      color: 'from-green-500 to-green-700',
+      bgGradient: 'from-green-50 to-green-100',
+    },
+    {
+      id: 'business',
+      title: 'Business Team',
+      subtitle: "Invest in your team's success",
+      description:
+        'Team up for company outings, training, or group investments. Strengthen team bonds while achieving business goals.',
+      image: '/iPhone 16 Plus Light.png',
+      alt: 'Business team saving for company goals',
+      stats: { users: '1.8K+', saved: '$750K' },
+      features: [
+        'Team building',
+        'Training funds',
+        'Equipment purchases',
+        'Company events',
+      ],
+      color: 'from-blue-500 to-blue-700',
+      bgGradient: 'from-blue-50 to-blue-100',
+    },
+  ]
+  // Precompute random values for hero particles to avoid hydration mismatch
+  const heroParticles = useMemo(() => {
+    return Array.from({ length: 20 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      x: Math.random() * 50 - 25,
+      duration: Math.random() * 3 + 2,
+      delay: Math.random() * 2,
+    }))
+  }, [])
+
   return (
     <div className='min-h-screen flex flex-col bg-gray-50 overflow-x-hidden overflow-y-hidden'>
       {/* Hero Section */}
@@ -204,23 +264,23 @@ export default function HomePage() {
       >
         {/* Animated Background Particles */}
         <div className='absolute inset-0 overflow-hidden'>
-          {[...Array(20)].map((_, i) => (
+          {heroParticles.map((particle, i) => (
             <motion.div
               key={i}
               className='absolute w-2 h-2 bg-blue-400 rounded-full opacity-20'
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
               }}
               animate={{
                 y: [0, -100, 0],
-                x: [0, Math.random() * 50 - 25, 0],
+                x: [0, particle.x, 0],
                 scale: [0, 1, 0],
               }}
               transition={{
-                duration: Math.random() * 3 + 2,
+                duration: particle.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: particle.delay,
               }}
             />
           ))}
@@ -343,6 +403,155 @@ export default function HomePage() {
           </div>
         </motion.div>
       </motion.section>
+
+      {/* Use Cases Section */}
+      <section className='py-20 px-6 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden'>
+        {/* Background Decorations */}
+        <div className='absolute inset-0 overflow-hidden'>
+          <div className='absolute -top-24 -right-24 w-96 h-96 bg-blue-100 rounded-full opacity-20'></div>
+          <div className='absolute -bottom-32 -left-32 w-80 h-80 bg-purple-100 rounded-full opacity-20'></div>
+        </div>
+
+        <div className='max-w-7xl mx-auto relative z-10'>
+          {/* Header */}
+          <motion.div
+            className='text-center mb-16'
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className='inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-4'
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4, type: 'spring' }}
+              viewport={{ once: true }}
+            >
+              Perfect for Every Group
+            </motion.div>
+
+            <h2 className='text-4xl md:text-5xl font-bold text-gray-900 mb-6'>
+              Tailored for Your{' '}
+              <span className='text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'>
+                Savings Goals
+              </span>
+            </h2>
+            <p className='text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed'>
+              Whether you're saving with family, friends, or colleagues,
+              SavingsHub adapts to your unique needs and goals.
+            </p>
+          </motion.div>
+
+          {/* Navigation Tabs */}
+          <motion.div
+            className='flex justify-center mb-12'
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className='bg-white rounded-2xl p-2 shadow-lg border border-gray-200'>
+              <div className='flex space-x-2'>
+                {useCases.map((useCase, index) => (
+                  <button
+                    key={useCase.id}
+                    onClick={() => setActiveCase(index)}
+                    className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                      activeCase === index
+                        ? `bg-gradient-to-r ${useCase.color} text-white shadow-lg transform scale-105`
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    }`}
+                  >
+                    {useCase.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Active Use Case Display */}
+          <motion.div
+            key={activeCase}
+            className={`bg-gradient-to-br ${useCases[activeCase].bgGradient} rounded-3xl p-8 md:p-12 shadow-xl border border-white/50`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className='grid lg:grid-cols-2 gap-12 items-center'>
+              {/* Left Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div className='mb-6'>
+                  <h3 className='text-3xl md:text-4xl font-bold text-gray-900 mb-2'>
+                    {useCases[activeCase].title}
+                  </h3>
+                  <p className='text-lg text-gray-700 font-medium mb-4'>
+                    {useCases[activeCase].subtitle}
+                  </p>
+                  <p className='text-gray-600 text-lg leading-relaxed'>
+                    {useCases[activeCase].description}
+                  </p>
+                </div>
+
+                {/* Features Grid */}
+                <div className='grid grid-cols-2 gap-3'>
+                  {useCases[activeCase].features.map((feature, index) => (
+                    <motion.div
+                      key={feature}
+                      className='flex items-center space-x-2 bg-white/60 rounded-lg p-3'
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.1 * index }}
+                    >
+                      <div
+                        className={`w-2 h-2 rounded-full bg-gradient-to-r ${useCases[activeCase].color}`}
+                      ></div>
+                      <span className='text-sm text-gray-700 font-medium'>
+                        {feature}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Right Content - Phone Mockup */}
+              <motion.div
+                className='flex justify-center lg:justify-end'
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <div className='relative'>
+                  {/* Main Phone */}
+                  <motion.div
+                    className='relative z-10'
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Image
+                      src={useCases[activeCase].image}
+                      alt={useCases[activeCase].alt}
+                      width={280}
+                      height={560}
+                      className='w-64 h-auto shadow-2xl rounded-3xl'
+                      priority
+                    />
+                  </motion.div>
+
+                  {/* Background Glow */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r ${useCases[activeCase].color} rounded-3xl opacity-20 blur-xl scale-110`}
+                  ></div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Interactive Features Section */}
       <motion.section
@@ -573,6 +782,7 @@ export default function HomePage() {
       </motion.section>
       <motion.section
         ref={faqRef}
+        id='faq'
         className='py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white'
         style={{ y: faqY, opacity: faqOpacity }}
       >
