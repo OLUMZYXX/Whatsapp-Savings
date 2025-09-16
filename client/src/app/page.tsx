@@ -787,29 +787,21 @@ export default function HomePage() {
               <motion.div
                 key={index}
                 className='bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300'
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 transition={{
                   duration: 0.7,
-                  delay: 0.3 * index,
-                  type: 'spring',
-                  stiffness: 80,
+                  delay: 0.2 * index,
+                  ease: 'easeOut',
                 }}
                 viewport={{ once: true }}
-                whileHover={{
-                  scale: 1.03,
-                  boxShadow: '0 8px 32px rgba(59,130,246,0.12)',
-                }}
+                whileHover={{ scale: 1.04 }}
               >
-                <motion.div
-                  className='text-center mb-4 sm:mb-6'
-                  whileHover={{ scale: 1.07 }}
-                  transition={{ duration: 0.25 }}
-                >
+                <div className='text-center mb-4 sm:mb-6'>
                   <span className='text-3xl sm:text-4xl'>
                     {testimonial.avatar}
                   </span>
-                </motion.div>
+                </div>
                 <blockquote className='text-base sm:text-lg text-gray-700 text-center mb-4 sm:mb-6 italic'>
                   &quot;{testimonial.content}&quot;
                 </blockquote>
@@ -956,13 +948,16 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 1.6 }}
             viewport={{ once: true }}
           >
-            <motion.button
-              className='w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm sm:text-base'
+            <motion.a
+              href='https://wa.me/?text=I%20want%20to%20create%20a%20SavingsHub%20group%20with%20my%20friends!'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm sm:text-base flex items-center justify-center'
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
               Start Your First Group
-            </motion.button>
+            </motion.a>
             <motion.button
               className='w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white text-white rounded-xl font-medium hover:bg-white hover:text-blue-600 transition-all duration-200 text-sm sm:text-base'
               whileHover={{

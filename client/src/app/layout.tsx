@@ -24,6 +24,15 @@ export default function RootLayout({
 
   return (
     <html lang='en'>
+      <head>
+        <title>SavingsHub - Group Savings Made Easy</title>
+        <meta
+          name='description'
+          content='Create savings groups, manage contributions, and save together with friends and family using WhatsApp. SavingsHub makes group saving simple and secure.'
+        />
+        <meta name='application-name' content='SavingsHub' />
+        <link rel='icon' href='/next.svg' type='image/svg+xml' />
+      </head>
       <body>
         {!isAuthPage && <Navbar />}
         <main>{children}</main>
