@@ -4,6 +4,15 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 
 export default function Navbar() {
+  // Smooth scroll to Use Cases section
+  const handleUseCasesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = document.getElementById('usecases')
+    if (el) {
+      e.preventDefault()
+      el.scrollIntoView({ behavior: 'smooth' })
+      setIsMobileMenuOpen(false)
+    }
+  }
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
@@ -22,6 +31,7 @@ export default function Navbar() {
           <Link
             href='#usecases'
             className='text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group'
+            onClick={handleUseCasesClick}
           >
             Use Cases
             <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full'></span>
@@ -101,7 +111,7 @@ export default function Navbar() {
           <Link
             href='#usecases'
             className='block text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2'
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={handleUseCasesClick}
           >
             Use Cases
           </Link>

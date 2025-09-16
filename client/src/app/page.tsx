@@ -444,7 +444,10 @@ export default function HomePage() {
       </motion.section>
 
       {/* Use Cases Section */}
-      <section className='py-20 px-6 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden'>
+      <section
+        id='usecases'
+        className='py-20 px-6 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden'
+      >
         {/* Background Decorations */}
         <div className='absolute inset-0 overflow-hidden'>
           <div className='absolute -top-24 -right-24 w-96 h-96 bg-blue-100 rounded-full opacity-20'></div>
@@ -477,7 +480,7 @@ export default function HomePage() {
               </span>
             </h2>
             <p className='text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed'>
-              Whether you're saving with family, friends, or colleagues,
+              Whether you&#39;re saving with family, friends, or colleagues,
               SavingsHub adapts to your unique needs and goals.
             </p>
           </motion.div>
